@@ -1,1 +1,39 @@
-<p>login works!</p>
+<section class="login-box">
+  <h1>Ingresa tus datos</h1>
+
+  <form class="login-form" [formGroup]="loginForm" (submit)="login()">
+    <mat-form-field class="full-width">
+      <mat-label>Correo Electrónico</mat-label>
+
+      <input matInput
+        type="text"
+        id="userEmail"
+        placeholder="ejemplo@techo.org"
+        formControlName="userEmail"
+      >
+
+      <mat-error>El email es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Contraseña</mat-label>
+
+      <input matInput
+        type="password"
+        id="userPasword"
+        formControlName="userPassword"
+        placeholder="*********"
+      >
+
+      <mat-error>Ingresa una contraseña</mat-error>
+    </mat-form-field>
+
+    <button class="login-btn" type="submit">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      Iniciar Sesión
+    </button>
+  </form>
+</section>
