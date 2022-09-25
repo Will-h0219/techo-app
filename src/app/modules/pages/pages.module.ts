@@ -10,6 +10,8 @@ import { NewActivityComponent } from './new-activity/new-activity.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material/material.module';
 import { ActivityCardComponent } from './components/activity-card/activity-card.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { ActivityCardComponent } from './components/activity-card/activity-card.
     CommonModule,
     PagesRoutingModule,
     RouterModule,
+    ReactiveFormsModule,
     MaterialModule,
+    MatNativeDateModule,
     SharedModule
   ],
   exports: [
