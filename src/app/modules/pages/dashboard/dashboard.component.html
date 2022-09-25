@@ -1,1 +1,14 @@
-<p>dashboard works!</p>
+<section class="container">
+  <div class="welcome">
+    <h1>Bienvenido!</h1>
+    <h2>Nombre usuario</h2>
+  </div>
+  
+  <div class="cards">
+    <h3>Ultimas actividades registradas</h3>
+    
+    <div class="cards__grid">
+      <app-activity-card *ngFor="let item of [1,1,1,1,1,1,1,1]"></app-activity-card>
+    </div>
+  </div>
+</section>

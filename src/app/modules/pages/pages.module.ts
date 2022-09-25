@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { NewActivityComponent } from './new-activity/new-activity.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material/material.module';
+import { ActivityCardComponent } from './components/activity-card/activity-card.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { MaterialModule } from 'src/app/material/material.module';
     PagesLayoutComponent,
     DashboardComponent,
     ActivitiesComponent,
-    NewActivityComponent
+    NewActivityComponent,
+    ActivityCardComponent
   ],
   imports: [
     CommonModule,
