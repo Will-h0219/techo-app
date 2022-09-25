@@ -93,7 +93,7 @@ export class NewActivityComponent implements OnInit {
     console.log(control)
   }
 
-  test() {
+  submit() {
     let date = this.activityForm.controls['fechaJornada'].value;
     if (!date) { date = new Date(); }
     this.activityForm.controls['fechaJornada'].setValue(new Date(date).toISOString());
