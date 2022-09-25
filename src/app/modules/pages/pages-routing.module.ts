@@ -11,8 +11,8 @@ const routes: Routes = [
     component: PagesLayoutComponent,
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'activities', component: ActivitiesComponent },
-      { path: 'new-activity', component: NewActivityComponent },
+      { path: 'actividades', component: ActivitiesComponent },
+      { path: 'nueva-actividad', component: NewActivityComponent },
     ]
   }
 ];

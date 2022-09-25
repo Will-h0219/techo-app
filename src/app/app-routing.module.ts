@@ -4,7 +4,7 @@ import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.c
 
 const routes: Routes = [
   {
-    path: 'dashboard',
+    path: 'tablero',
     loadChildren: () => import('./modules/pages/pages.module').then( m => m.PagesModule)
   },
   {
