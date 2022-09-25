@@ -1,4 +1,4 @@
-<section class="container">
+<section class="container main">
   <div class="welcome">
     <h1>Bienvenido!</h1>
     <h2>Nombre usuario</h2>
@@ -10,5 +10,11 @@
     <div class="cards__grid">
       <app-activity-card *ngFor="let item of [1,1,1,1,1,1,1,1]"></app-activity-card>
     </div>
+  </div>
+
+  <div class="add">
+    <a mat-fab class="add__btn" [routerLink]="[ 'nueva-actividad' ]" color="primary">
+      <mat-icon class="add__icon">add</mat-icon>
+    </a>
   </div>
 </section>

@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/tablero',
     pathMatch: 'full'
   },
   { 

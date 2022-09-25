@@ -1,8 +1,4 @@
 .container {
-  max-width: 1366px;
-  margin: 0px auto;
-  padding: 0px 24px;
-
   .welcome {
     padding-top: 18px;
 
@@ -21,6 +17,23 @@
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       column-gap: 32px;
       row-gap: 22px;
+    }
+  }
+
+  .add {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 15px;
+    &__btn {
+      transform: scale(0.9);
+      transition: 0.3s;
+      &:hover {
+        transform: scale(1);
+      }
+    }
+    &__icon {
+      transform: scale(1.8);
     }
   }
 }

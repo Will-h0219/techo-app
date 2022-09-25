@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../material/material.module';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
     MaterialModule
   ],
   exports: [
