@@ -17,6 +17,16 @@
     text-align: center;
   }
 
+  .error-msg {
+    width: 100%;
+    text-align: center;
+    p {
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      color: #c32f28;
+    }
+  }
+
   mat-label {
     color: #03E9F4;
   }
