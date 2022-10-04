@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { PagesModule } from './modules/pages/pages.module';
-import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './shared/shared.module';
+import { HttpInterceptProviders } from './http-interceptors/intercept.providers';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,12 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     HttpClientModule,
     AuthModule,
-    PagesModule
+    PagesModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [
+    HttpInterceptProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
