@@ -11,6 +11,7 @@ export interface LoginResponse {
 
 export interface LoginResult {
   token: string;
+  voluntarioId: number;
   nombreVoluntario: string;
   rolVoluntario: string;
 }

@@ -4,16 +4,32 @@
       <a [routerLink]="[ '/tablero' ]" (click)="sidenav.toggle()">
         <span class="techo-icon"></span>
       </a>
-
-      
     </mat-toolbar>
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar class="toolbar" color="primary">
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <span>Perfil</span>
+        </button>
+        
+        <button mat-menu-item>
+          <span>Comunidad</span>
+        </button>
+        
+        <button mat-menu-item (click)="logout()">
+          <span>Cerrar Sesión</span>
+        </button>
+      </mat-menu>
     </mat-toolbar>
 
     <ng-content></ng-content>
