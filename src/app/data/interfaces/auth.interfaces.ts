@@ -6,10 +6,10 @@ export interface LoginBody {
 export interface LoginResponse {
   status: number;
   message: string;
-  result: LoginResult;
+  result: UserData;
 }
 
-export interface LoginResult {
+export interface UserData {
   token: string;
   voluntarioId: number;
   nombreVoluntario: string;

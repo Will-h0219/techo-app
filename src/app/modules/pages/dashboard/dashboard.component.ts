@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ActivityService } from '../../../../app/data/services/activity/activity.service';
+import { UserData } from '../../../../app/data/interfaces/auth.interfaces';
+import { SimpleActivity } from '../../../../app/data/interfaces/activity.interfaces';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  userData!: UserData;
+  activities: SimpleActivity[] = [];
+
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit(): void {
+    this.userData = JSON.parse(localStorage.getItem('userData')!);
+    this.setActivities();
   }
 
+  setActivities() {
+    this.activityService.getActivities(this.userData.voluntarioId).subscribe({
+      next: (resp) => this.activities = resp.data
+    })
+  }
 }

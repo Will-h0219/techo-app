@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SimpleActivity } from '../../../../../app/data/interfaces/activity.interfaces';
 
 @Component({
   selector: 'app-activity-card',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivityCardComponent implements OnInit {
 
+  @Input() activity!: SimpleActivity;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  checkMesaTrabajo(fueMesaTrabajo: boolean) {
+    return fueMesaTrabajo ? 'Sí' : 'No';
   }
 
 }
