@@ -12,6 +12,12 @@
   }
 
   .cards {
+    .no-activities {
+      font-weight: 500;
+      color: #a5a5a5;
+      width: 100%;
+      text-align: center;
+    }
     &__grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

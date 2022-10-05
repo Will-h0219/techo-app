@@ -6,10 +6,14 @@
   
   <div class="cards">
     <h3>Ultimas actividades registradas</h3>
+
+    <ng-container *ngIf="!activities.length">
+      <h3 class="no-activities">No tienes actividades registradas.</h3>
+    </ng-container>
     
     <div class="cards__grid">
       <ng-container *ngFor="let item of activities">
-        <app-activity-card [activity]="item"></app-activity-card>
+        <app-activity-card [activity]="item" [coordinador]="userData.coordinador"></app-activity-card>
       </ng-container>
     </div>
   </div>

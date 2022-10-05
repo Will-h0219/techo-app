@@ -13,8 +13,6 @@ import { AuthService } from '../../../../app/data/services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  showErrorMsg: boolean = false;
-
   loginForm: FormGroup = this.fb.group({
     userEmail: ['', [Validators.required]],
     userPassword: ['', [Validators.required]]

@@ -9,6 +9,7 @@ import { SimpleActivity } from '../../../../../app/data/interfaces/activity.inte
 export class ActivityCardComponent implements OnInit {
 
   @Input() activity!: SimpleActivity;
+  @Input() coordinador: boolean = false;
 
   constructor() { }
 

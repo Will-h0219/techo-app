@@ -14,4 +14,5 @@ export interface UserData {
   voluntarioId: number;
   nombreVoluntario: string;
   rolVoluntario: string;
+  coordinador: boolean;
 }

@@ -3,6 +3,7 @@
     <p><strong>Comunidad: </strong>{{ activity.nombreComunidad | titlecase }}</p>
     <p><strong>Fecha: </strong>{{ activity.fechaJornada | date }}</p>
     <p><strong>Fue mesa de trabajo?: </strong>{{ checkMesaTrabajo(activity.esMesaTrabajo) }}</p>
+    <p *ngIf="coordinador"><strong>Registrada por: </strong>{{ activity.nombreVoluntario | titlecase }}</p>
   </mat-card-content>
 
   <mat-card-actions align="end">
