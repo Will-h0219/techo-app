@@ -15,8 +15,13 @@ export class ActivityService {
   
   constructor(private http: HttpClient) { }
 
-  getActivities(volunteerId: number): Observable<PaginatedData> {
-    const url = `${this.baseUrl}/api/actividades/${volunteerId}`;
+  getVolunteerActivities(volunteerId: number): Observable<PaginatedData> {
+    const url = `${this.baseUrl}/api/actividades/por-voluntario/${volunteerId}`;
+    return this.http.get<PaginatedData>(url);
+  }
+
+  getCommunityActivities(comunidadId: number): Observable<PaginatedData> {
+    const url = `${this.baseUrl}/api/actividades/por-comunidad/${comunidadId}`;
     return this.http.get<PaginatedData>(url);
   }
 
