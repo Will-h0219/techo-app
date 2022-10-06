@@ -15,4 +15,5 @@ export interface UserData {
   nombreVoluntario: string;
   rolVoluntario: string;
   coordinador: boolean;
+  comunidadAsignada: number;
 }

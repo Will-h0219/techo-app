@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { filter, tap } from 'rxjs';
 
-import { CommunityInfo } from '../../../data/interfaces/community.interfaces';
-import { VolunteerItem } from '../../../data/interfaces/volunteer.interfaces';
-import { VolunteerService } from '../../../data/services/volunteer/volunteer.service';
-import { CommunityService } from '../../../data/services/community/community.service';
+import { ActivityService } from '../../../../app/data/services/activity/activity.service';
+import { UserData } from '../../../../app/data/interfaces/auth.interfaces';
+import { ActivityFormValue } from '../../../../app/data/interfaces/activityForm.interfaces';
+import { NewActivityBody } from '../../../../app/data/interfaces/activity.interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-activity',
@@ -14,91 +13,53 @@ import { CommunityService } from '../../../data/services/community/community.ser
 })
 export class NewActivityComponent implements OnInit {
 
-  communities: CommunityInfo[] = [];
-  volunteers: VolunteerItem[] = [];
+  userData!: UserData;
 
-  activityForm: FormGroup = this.fb.group({
-    comunidadId: [null, [Validators.required]],
-    fechaJornada: [null, [Validators.required]],
-    esMesaTrabajo: [null, [Validators.required]],
-
-    mesaTrabajo: this.fb.group({
-      temasTratados: [null, [Validators.required]],
-      compromisos: [null, [Validators.required]],
-      numeroHabitantes: [null, [Validators.required]],
-      linkActa: [null],
-    }),
-
-    actividadAlternativa: this.fb.group({
-      actividadesRealizadas: [null, [Validators.required]],
-      descripcionActividad: [null, [Validators.required]]
-    }),
-
-    voluntariosIds: [{value: null, disabled: true}, [Validators.required]]
-  });
-
-  get controls() {
-    return this.activityForm.controls;
-  }
-
-  constructor(private communityService: CommunityService,
-    private volunteerService: VolunteerService,
-    private fb: FormBuilder) { }
+  constructor(private activityService: ActivityService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.activityForm.get('mesaTrabajo')?.disable();
-    this.activityForm.get('actividadAlternativa')?.disable();
-    this.setCommunities();
-    this.setVolunteers();
-    this.workbenchChanges();
+    this.userData = JSON.parse(localStorage.getItem('userData')!);
   }
-  
-  setCommunities() {
-    this.communityService.getCommunities().subscribe({
-      next: (res) => this.communities = res
+
+  submit(formValue: ActivityFormValue) {
+    let body = this.createNewActivityBody(formValue);
+
+    this.activityService.newActivity(body).subscribe({
+      next: (resp) => {
+        console.log(resp);
+      }
     });
   }
 
-  setVolunteers() {
-    this.volunteerService.volunteerCatalogue().subscribe({
-      next: (res) => this.volunteers = res
-    })
-  }
-  
-  workbenchChanges() {
-    this.activityForm.controls['esMesaTrabajo'].valueChanges.pipe(
-        tap(() => {
-          this.activityForm.get('mesaTrabajo')?.disable();
-          this.activityForm.get('actividadAlternativa')?.disable();
-          this.controls['voluntariosIds'].disable();
-        }),
-        filter((value) => value !== null)
-      )
-      .subscribe({
-        next: (value) => {
-          if (value) {
-            this.activityForm.get('mesaTrabajo')?.enable();
-            this.activityForm.get('actividadAlternativa')?.disable();
-          } else {
-            this.activityForm.get('actividadAlternativa')?.enable();
-            this.activityForm.get('mesaTrabajo')?.disable();
-            
-          }
-          this.controls['voluntariosIds'].enable();
+  createNewActivityBody(formValue: ActivityFormValue) {
+    let date = formValue.fechaJornada;
+
+    const body: NewActivityBody = {
+      comunidadId: formValue.comunidadId,
+      voluntarioId: this.userData.voluntarioId,
+      esMesaTrabajo: formValue.esMesaTrabajo,
+      fechaJornada: !date ? new Date().toISOString() : new Date(date).toISOString(),
+      voluntariosIds: formValue.voluntariosIds
+    };
+
+    if (body.esMesaTrabajo) {
+      body.mesaTrabajo = {
+        compromisos: formValue.mesaTrabajo!.compromisos,
+        temasTratados: formValue.mesaTrabajo!.temasTratados,
+        habitantesParticipantes: formValue.mesaTrabajo!.numeroHabitantes
+      }
+      if (!!formValue.mesaTrabajo!.linkActa) {
+        body.mesaTrabajo.linkActa = formValue.mesaTrabajo!.linkActa;
+      }
+    } else {
+        body.actividadAlternativa = {
+          nombre: formValue.actividadAlternativa!.actividadesRealizadas,
+          descripcion: formValue.actividadAlternativa!.descripcionActividad
         }
-      });
-  }
+    }
 
-  validField(control: AbstractControl) {
-    console.log(control)
-  }
-
-  submit() {
-    let date = this.activityForm.controls['fechaJornada'].value;
-    if (!date) { date = new Date(); }
-    this.activityForm.controls['fechaJornada'].setValue(new Date(date).toISOString());
-    console.log(this.activityForm.value);
-    this.activityForm.reset();
+    return body;
   }
 
 }

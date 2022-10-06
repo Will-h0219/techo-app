@@ -12,6 +12,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { ActivityCardComponent } from './components/activity-card/activity-card.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NewActivityFormComponent } from './components/new-activity-form/new-activity-form.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     ActivitiesComponent,
     NewActivityComponent,
-    ActivityCardComponent
+    ActivityCardComponent,
+    NewActivityFormComponent
   ],
   imports: [
     CommonModule,

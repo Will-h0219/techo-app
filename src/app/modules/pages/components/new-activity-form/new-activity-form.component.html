@@ -1,0 +1,109 @@
+<form class="form" autocomplete="off" [formGroup]="activityForm" (ngSubmit)="submit()">
+  <div class="form__activity">
+    <mat-form-field class="community w-50">
+      <mat-label>Comunidad</mat-label>
+
+      <mat-select formControlName="comunidadId" [disabled]="!userData.coordinador">
+        <mat-option *ngFor="let item of communities" [value]="item.id">
+          {{ item.nombre | titlecase }}
+        </mat-option>
+      </mat-select>
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+
+    <div class="row--between workbench">
+      <mat-form-field>
+        <mat-label>Fecha de la actividad</mat-label>
+
+        <input matInput [matDatepicker]="picker" formControlName="fechaJornada">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error>Campo obligatorio</mat-error>
+      </mat-form-field>
+
+      <div class="workbench__check">
+        <mat-label>Fue mesa de trabajo?</mat-label>
+        <mat-radio-group class="workbench__radio" formControlName="esMesaTrabajo">
+          <mat-radio-button [value]="true">Si</mat-radio-button>
+          <mat-radio-button [value]="false">No</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+  </div>
+
+  <div class="complement workbench-activity" formGroupName="mesaTrabajo" *ngIf="activityForm.controls['esMesaTrabajo'].value === true">
+    <mat-form-field class="w-100">
+      <mat-label>Temas tratados</mat-label>
+      <input type="text" 
+        matInput
+        formControlName="temasTratados"
+        placeholder="Mesa de trabajo, presentación del equipo, etc.">
+
+        <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="w-100">
+      <mat-label>Compromisos</mat-label>
+      <textarea matInput rows="4" formControlName="compromisos"></textarea>
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="w-100">
+      <mat-label>Número de habitantes</mat-label>
+      <input type="number" matInput min="0" formControlName="numeroHabitantes">
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field class="w-100">
+      <mat-label>Link del acta</mat-label>
+      <input type="text" matInput formControlName="linkActa">
+    </mat-form-field>
+  </div>
+  
+  <div class="complement alternative-activity" formGroupName="actividadAlternativa" *ngIf="activityForm.controls['esMesaTrabajo'].value === false">
+    <mat-form-field class="w-100">
+      <mat-label>Actividades realizadas</mat-label>
+      <input type="text" matInput formControlName="actividadesRealizadas">
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Descripción de la actividad</mat-label>
+      <textarea rows="4" matInput formControlName="descripcionActividad"></textarea>
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+  </div>
+
+  <ng-container *ngIf="controls['esMesaTrabajo'].value !== null">
+    <mat-form-field class="w-100">
+      <mat-label>Voluntarios que participaron en la jornada</mat-label>
+      <mat-select formControlName="voluntariosIds" multiple formControlName="voluntariosIds">
+
+        <mat-optgroup *ngFor="let community of volunteers" [label]="community.nombre | titlecase">
+          <mat-option *ngFor="let item of community.voluntarios" [value]="item.id">
+            {{ item.nombres | titlecase }}
+          </mat-option>
+        </mat-optgroup>
+
+      </mat-select>
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+  </ng-container>
+
+  <div class="submit" *ngIf="controls['esMesaTrabajo'].value !== null">
+    <div matTooltip="Completa el formulario con los valores requeridos" [matTooltipDisabled]="activityForm.valid">
+      <button mat-raised-button color="primary" type="submit" [disabled]="activityForm.invalid">
+        Enviar
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+    </div>
+  </div>
+</form>

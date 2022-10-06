@@ -20,48 +20,4 @@
       }
     }
   }
-
-  .row {
-    display: flex;
-    align-items: center;
-  }
-  .row--between {
-    @extend .row;
-    justify-content: space-between;
-  }
-
-  .workbench {
-    width: 75% !important;
-    &__check {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-      padding: 7px 0;
-    }
-    &__radio {
-      display: flex;
-      gap: 16px;
-    }
-  }
-
-  .complement {
-    width: 100%;
-    padding-top: 17px;
-  }
-
-  .submit {
-    margin-top: 24px;
-    display: flex;
-    justify-content: end;
-  }
-
-  .w-100 {
-    width: 100% !important;
-  }
-  .w-75 {
-    width: 75% !important;
-  }
-  .w-50 {
-    width: 50% !important;
-  }
 }
