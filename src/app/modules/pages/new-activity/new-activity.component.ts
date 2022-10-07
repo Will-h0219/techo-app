@@ -5,6 +5,8 @@ import { UserData } from '../../../../app/data/interfaces/auth.interfaces';
 import { ActivityFormValue } from '../../../../app/data/interfaces/activityForm.interfaces';
 import { NewActivityBody } from '../../../../app/data/interfaces/activity.interfaces';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivityAddedDialogComponent } from '../components/dialogs/activity-added-dialog/activity-added-dialog.component';
 
 @Component({
   selector: 'app-new-activity',
@@ -16,7 +18,8 @@ export class NewActivityComponent implements OnInit {
   userData!: UserData;
 
   constructor(private activityService: ActivityService,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userData')!);
@@ -28,6 +31,7 @@ export class NewActivityComponent implements OnInit {
     this.activityService.newActivity(body).subscribe({
       next: (resp) => {
         console.log(resp);
+        this.dialog.open(ActivityAddedDialogComponent);
       }
     });
   }
@@ -61,5 +65,4 @@ export class NewActivityComponent implements OnInit {
 
     return body;
   }
-
 }

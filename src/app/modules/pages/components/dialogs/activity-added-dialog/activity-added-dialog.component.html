@@ -1,0 +1,14 @@
+<div class="center">
+  <h1 class="title">La actividad fue registrada con éxito!</h1>
+</div>
+
+<mat-dialog-content class="center content">
+  <p>Puedes revisar tus ultimas actividades en la pagina de inicio.</p>
+  <p>Deseas agregar una actividad nueva?</p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button color="primary" mat-dialog-close>Quiero agregar otra actividad</button>
+
+  <a mat-raised-button color="primary" [routerLink]="[ '/tablero' ]" mat-dialog-close>Salir</a>
+</mat-dialog-actions>

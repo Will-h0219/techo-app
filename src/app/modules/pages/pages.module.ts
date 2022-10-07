@@ -13,6 +13,7 @@ import { ActivityCardComponent } from './components/activity-card/activity-card.
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewActivityFormComponent } from './components/new-activity-form/new-activity-form.component';
+import { ActivityAddedDialogComponent } from './components/dialogs/activity-added-dialog/activity-added-dialog.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { NewActivityFormComponent } from './components/new-activity-form/new-act
     ActivitiesComponent,
     NewActivityComponent,
     ActivityCardComponent,
-    NewActivityFormComponent
+    NewActivityFormComponent,
+    ActivityAddedDialogComponent
   ],
   imports: [
     CommonModule,
