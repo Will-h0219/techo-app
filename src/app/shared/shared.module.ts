@@ -5,11 +5,13 @@ import { MaterialModule } from '../material/material.module';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './spinner/spinner.component';
+import { UnauthorizedDialogComponent } from './dialogs/unauthorized-dialog/unauthorized-dialog.component';
 
 @NgModule({
   declarations: [
     SidenavComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UnauthorizedDialogComponent
   ],
   imports: [
     CommonModule,
