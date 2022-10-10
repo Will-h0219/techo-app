@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesLayoutComponent } from './pages-layout/pages-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ActivitiesComponent } from './activities/activities.component';
 import { RouterModule } from '@angular/router';
 import { NewActivityComponent } from './new-activity/new-activity.component';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -14,17 +13,18 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NewActivityFormComponent } from './components/new-activity-form/new-activity-form.component';
 import { ActivityAddedDialogComponent } from './components/dialogs/activity-added-dialog/activity-added-dialog.component';
+import { ActivityComponent } from './activity/activity.component';
 
 
 @NgModule({
   declarations: [
     PagesLayoutComponent,
     DashboardComponent,
-    ActivitiesComponent,
     NewActivityComponent,
     ActivityCardComponent,
     NewActivityFormComponent,
-    ActivityAddedDialogComponent
+    ActivityAddedDialogComponent,
+    ActivityComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +38,6 @@ import { ActivityAddedDialogComponent } from './components/dialogs/activity-adde
   exports: [
     PagesLayoutComponent,
     DashboardComponent,
-    ActivitiesComponent
   ]
 })
 export class PagesModule { }
