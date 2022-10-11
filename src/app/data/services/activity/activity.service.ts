@@ -7,6 +7,7 @@ import { NewActivityBody, SimpleActivity } from '../../interfaces/activity.inter
 import { UserData } from '../../interfaces/auth.interfaces';
 import { DetailedActivityInfo } from '../../interfaces/detailedActivity.interfaces';
 import { PaginatedData } from '../../interfaces/pagination.interface';
+import { QueryParams } from '../../interfaces/queryParam.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,15 @@ export class ActivityService {
     return this.http.get<PaginatedData>(url);
   }
 
-  getCommunityActivities(comunidadId: number): Observable<PaginatedData> {
+  getCommunityActivities(comunidadId: number, queryParams?: QueryParams[]): Observable<PaginatedData> {
     const url = `${this.baseUrl}/api/actividades/por-comunidad/${comunidadId}`;
+    if (!!queryParams) {
+      let params = new HttpParams();
+      queryParams.forEach((param) => {
+        params = params.append(param.name, param.value);
+      });
+      return this.http.get<PaginatedData>(url, { params });
+    }
     return this.http.get<PaginatedData>(url);
   }
 

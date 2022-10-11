@@ -5,7 +5,15 @@
   </div>
   
   <div class="cards">
-    <h3>Ultimas actividades registradas</h3>
+    <div class="controls">
+      <h3>Ultimas actividades registradas</h3>
+      <mat-paginator *ngIf="(pagination | async)"
+        [length]="(pagination | async)?.totalCount"
+        [pageSize]="(pagination | async)?.pageSize"
+        hidePageSize="true"
+        (page)="handlePageEvent($event)"
+      ></mat-paginator>
+    </div>
 
     <ng-container *ngIf="!activities.length">
       <h3 class="no-activities">Aun no hay actividades registradas.</h3>
