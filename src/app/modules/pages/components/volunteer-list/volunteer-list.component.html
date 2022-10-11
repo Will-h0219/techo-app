@@ -1,0 +1,17 @@
+<div class="activity__volunteers">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ title }}</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+
+    <mat-card-content>
+      <mat-list role="list">
+        <ng-container *ngFor="let item of attendees; let lastItem = last;">
+          <mat-list-item role="listitem">{{ item.nombre | titlecase }}</mat-list-item>
+          <mat-divider *ngIf="!lastItem"></mat-divider>
+        </ng-container>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,1 +1,94 @@
-<p>activity works!</p>
+<section class="main">
+  
+  <app-navigation-title title="Detalles de la actividad"></app-navigation-title>
+
+  <div class="activity" *ngIf="activity$ | async as activity; else loading">
+    <div class="activity__info">
+      
+      <div class="row">
+        <div class="info-row baseline">
+          <h3 class="title">Comunidad:</h3>
+          <p>{{ activity.generalidades.nombreComunidad | titlecase }}</p>
+        </div>
+  
+        <div class="info-row baseline">
+          <h3 class="title">Estado:</h3>
+          <p>{{ activity.generalidades.estado }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="info-row baseline">
+          <h3 class="title">Fecha de la jornada:</h3>
+          <p>{{ activity.generalidades.fechaJornada | date }}</p>
+        </div>
+  
+        <div class="info-row baseline">
+          <h3 class="title">Fue mesa de trabajo?:</h3>
+          <p>{{ activity.generalidades.esMesaTrabajo ? 'Sí' : 'No' }}</p>
+        </div>
+
+      </div>
+
+      <ng-container *ngIf="activity.generalidades.esMesaTrabajo; else alternativeActivity">
+        <div>
+          <h3 class="title">Temas tratados:</h3>
+          <p>{{ activity.temasTratados }}</p>
+          <h3 class="title">Compromisos acordados entre la comunidad y el equipo:</h3>
+          <p>{{ activity.compromisos }}</p>
+        </div>
+
+        <div class="row">
+          <div class="info-row center">
+            <h3 class="title">Número de personas de la comunidad en la jornada:</h3>
+            <p>{{ activity.habitantesParticipantes }}</p>
+          </div>
+
+          <ng-container *ngIf="!!activity.linkActa">
+            <a mat-button [href]="activity.linkActa" target="_blank">
+              Acta de la jornada 
+              <mat-icon>open_in_new</mat-icon>
+            </a>
+          </ng-container>
+        </div>
+      </ng-container>
+
+      <ng-template #alternativeActivity>
+        <div class="info-group">
+          <h3 class="title">Tipo de jornada realizada:</h3>
+          <p>{{ activity.nombre }}</p>
+          <h3 class="title">Descripción de la actividad:</h3>
+          <p>{{ activity.descripcion }}</p>
+        </div>
+      </ng-template>
+      
+    </div>
+
+    <app-volunteer-list [attendees]="activity.generalidades.asistentes" title="Voluntarios que participaron en la jornada"></app-volunteer-list>
+
+    <div class="activity__action">
+      <a
+        mat-raised-button
+        color="primary"
+        class="edit-btn"
+        [routerLink]="[ '/tablero/editar-actividad', activity.id ]"
+      >
+        Editar
+        <mat-icon>edit</mat-icon>
+      </a>
+
+      <ng-container *ngIf="userData.coordinador">
+        <button mat-raised-button color="warn" (click)="openDeleteDialog()">
+          Eliminar
+          <mat-icon>delete</mat-icon>
+        </button>
+      </ng-container>
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <h2>Obteniendo información...</h2>
+  </ng-template>
+  
+  
+</section>

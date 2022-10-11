@@ -1,6 +1,6 @@
 export interface VolunteerItem {
   id: number;
-  nombres: string;
+  nombre: string;
 }
 
 export interface VolunteerPerCommunity {

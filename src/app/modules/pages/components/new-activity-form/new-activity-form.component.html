@@ -88,7 +88,7 @@
 
         <mat-optgroup *ngFor="let community of volunteers" [label]="community.nombre | titlecase">
           <mat-option *ngFor="let item of community.voluntarios" [value]="item.id">
-            {{ item.nombres | titlecase }}
+            {{ item.nombre | titlecase }}
           </mat-option>
         </mat-optgroup>
 

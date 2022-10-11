@@ -1,0 +1,15 @@
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  .back-btn {
+    transform: scale(.7);
+    transition: .3s;
+    &:hover {
+      transform: scale(.86);
+    }
+  }
+  h1 {
+    margin: 0;
+  }
+}

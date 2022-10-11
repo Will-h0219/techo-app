@@ -1,0 +1,64 @@
+@import '../../../../styles/medias';
+
+.main {
+  padding-top: 24px;
+
+  .activity {
+    padding-top: 18px;
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    @include sm-screen() {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      column-gap: 42px;
+      row-gap: 14px;
+      grid-template-areas: 
+        "detail detail volunteers"
+        "action action volunteers";
+    }
+    &__info {
+      grid-area: detail;
+    }
+    &__volunteers {
+      grid-area: volunteers;
+    }
+    &__action {
+      grid-area: action;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      @include sm-screen() {
+        flex-direction: row;
+      }
+      .edit-btn {
+        width: 100%;
+        @include sm-screen() {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .title {
+    font-weight: 500;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    column-gap: 16px;
+    align-items: center;
+  }
+  .info-row {
+    display: flex;
+    gap: 12px;
+    &.baseline {
+      align-items: baseline;
+    }
+    &.center {
+      align-items: center;
+    }
+  }
+}

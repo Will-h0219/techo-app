@@ -7,7 +7,7 @@
   </mat-card-content>
 
   <mat-card-actions align="end">
-    <a mat-raised-button color="primary">
+    <a mat-raised-button color="primary" [routerLink]="['actividad', activity.id]" [queryParams]="{ workbench: activity.esMesaTrabajo }">
       Ver más
       <mat-icon>navigate_next</mat-icon>
     </a>

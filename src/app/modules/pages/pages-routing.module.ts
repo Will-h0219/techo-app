@@ -12,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'nueva-actividad', component: NewActivityComponent },
+      { path: 'editar-actividad/:id', component: NewActivityComponent },
       { path: 'actividad/:id', component: ActivityComponent },
     ]
   }

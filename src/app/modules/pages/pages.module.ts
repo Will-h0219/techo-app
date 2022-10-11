@@ -14,6 +14,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NewActivityFormComponent } from './components/new-activity-form/new-activity-form.component';
 import { ActivityAddedDialogComponent } from './components/dialogs/activity-added-dialog/activity-added-dialog.component';
 import { ActivityComponent } from './activity/activity.component';
+import { NavigationTitleComponent } from './components/navigation-title/navigation-title.component';
+import { VolunteerListComponent } from './components/volunteer-list/volunteer-list.component';
+import { DeleteActivityDialogComponent } from './components/dialogs/delete-activity-dialog/delete-activity-dialog.component';
 
 
 @NgModule({
@@ -24,7 +27,10 @@ import { ActivityComponent } from './activity/activity.component';
     ActivityCardComponent,
     NewActivityFormComponent,
     ActivityAddedDialogComponent,
-    ActivityComponent
+    ActivityComponent,
+    NavigationTitleComponent,
+    VolunteerListComponent,
+    DeleteActivityDialogComponent,
   ],
   imports: [
     CommonModule,
