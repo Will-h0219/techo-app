@@ -12,7 +12,7 @@
       <mat-error>Campo obligatorio</mat-error>
     </mat-form-field>
 
-    <div class="row--between workbench">
+    <div class="workbench">
       <mat-form-field>
         <mat-label>Fecha de la actividad</mat-label>
 
@@ -33,27 +33,29 @@
       </div>
     </div>
 
-    <mat-form-field class="w-100">
-      <mat-label>Voluntarios que participaron en la jornada</mat-label>
-      <mat-select formControlName="voluntariosIds" multiple>
-
-        <mat-optgroup *ngFor="let community of volunteers" [label]="community.nombre | titlecase">
-          <mat-option *ngFor="let item of community.voluntarios" [value]="item.id">
-            {{ item.nombre | titlecase }}
-          </mat-option>
-        </mat-optgroup>
-
-      </mat-select>
-
-      <mat-error>Campo obligatorio</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="w-100">
-      <mat-label>Número de personas de la comunidad</mat-label>
-      <input type="number" matInput min="0" formControlName="numeroHabitantes" placeholder="Líderes, lideresas, vecinos, vecinas, entre otros">
-
-      <mat-error>Campo obligatorio</mat-error>
-    </mat-form-field>
+    <div class="participants">
+      <mat-form-field class="w-100">
+        <mat-label>Voluntarios que participaron en la jornada</mat-label>
+        <mat-select formControlName="voluntariosIds" multiple>
+  
+          <mat-optgroup *ngFor="let community of volunteers" [label]="community.nombre | titlecase">
+            <mat-option *ngFor="let item of community.voluntarios" [value]="item.id">
+              {{ item.nombre | titlecase }}
+            </mat-option>
+          </mat-optgroup>
+  
+        </mat-select>
+  
+        <mat-error>Campo obligatorio</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="w-100">
+        <mat-label>Número de personas de la comunidad</mat-label>
+        <input type="number" matInput min="0" formControlName="numeroHabitantes" placeholder="Líderes, lideresas, vecinos, vecinas, entre otros">
+  
+        <mat-error>Campo obligatorio</mat-error>
+      </mat-form-field>
+    </div>
   </div>
 
   <div class="complement workbench-activity" formGroupName="mesaTrabajo" *ngIf="activityForm.controls['esMesaTrabajo'].value === true">

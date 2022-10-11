@@ -1,14 +1,18 @@
-.row {
-  display: flex;
-  align-items: center;
-}
-.row--between {
-  @extend .row;
-  justify-content: space-between;
-}
+@import '../../../../../styles/medias';
 
 .workbench {
-  width: 75% !important;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 15px;
+  @include sm-screen() {
+    width: 75%;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+  }
   &__check {
     display: flex;
     gap: 24px;
@@ -19,6 +23,12 @@
     display: flex;
     gap: 16px;
   }
+}
+
+.participants {
+  display: flex;
+  flex-flow: column;
+  gap: 15px;
 }
 
 .complement {

@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   setActivities() {
     this.activityService.getCommunityActivities(this.userData.comunidadAsignada).subscribe({
-      next: (resp) => this.activities = resp.data
+      next: (resp) => { this.activities = resp.data; console.log(resp) }
     })
   }
 }
