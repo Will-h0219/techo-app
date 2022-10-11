@@ -32,6 +32,28 @@
         </mat-radio-group>
       </div>
     </div>
+
+    <mat-form-field class="w-100">
+      <mat-label>Voluntarios que participaron en la jornada</mat-label>
+      <mat-select formControlName="voluntariosIds" multiple>
+
+        <mat-optgroup *ngFor="let community of volunteers" [label]="community.nombre | titlecase">
+          <mat-option *ngFor="let item of community.voluntarios" [value]="item.id">
+            {{ item.nombre | titlecase }}
+          </mat-option>
+        </mat-optgroup>
+
+      </mat-select>
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="w-100">
+      <mat-label>Número de personas de la comunidad</mat-label>
+      <input type="number" matInput min="0" formControlName="numeroHabitantes" placeholder="Líderes, lideresas, vecinos, vecinas, entre otros">
+
+      <mat-error>Campo obligatorio</mat-error>
+    </mat-form-field>
   </div>
 
   <div class="complement workbench-activity" formGroupName="mesaTrabajo" *ngIf="activityForm.controls['esMesaTrabajo'].value === true">
@@ -53,13 +75,6 @@
     </mat-form-field>
     
     <mat-form-field class="w-100">
-      <mat-label>Número de habitantes</mat-label>
-      <input type="number" matInput min="0" formControlName="numeroHabitantes">
-
-      <mat-error>Campo obligatorio</mat-error>
-    </mat-form-field>
-    
-    <mat-form-field class="w-100">
       <mat-label>Link del acta</mat-label>
       <input type="text" matInput formControlName="linkActa">
     </mat-form-field>
@@ -67,36 +82,19 @@
   
   <div class="complement alternative-activity" formGroupName="actividadAlternativa" *ngIf="activityForm.controls['esMesaTrabajo'].value === false">
     <mat-form-field class="w-100">
-      <mat-label>Actividades realizadas</mat-label>
+      <mat-label>Tipo de jornada</mat-label>
       <input type="text" matInput formControlName="actividadesRealizadas">
 
       <mat-error>Campo obligatorio</mat-error>
     </mat-form-field>
 
     <mat-form-field class="w-100">
-      <mat-label>Descripción de la actividad</mat-label>
+      <mat-label>Descripción de la jornada</mat-label>
       <textarea rows="4" matInput formControlName="descripcionActividad"></textarea>
 
       <mat-error>Campo obligatorio</mat-error>
     </mat-form-field>
   </div>
-
-  <ng-container *ngIf="controls['esMesaTrabajo'].value !== null">
-    <mat-form-field class="w-100">
-      <mat-label>Voluntarios que participaron en la jornada</mat-label>
-      <mat-select formControlName="voluntariosIds" multiple formControlName="voluntariosIds">
-
-        <mat-optgroup *ngFor="let community of volunteers" [label]="community.nombre | titlecase">
-          <mat-option *ngFor="let item of community.voluntarios" [value]="item.id">
-            {{ item.nombre | titlecase }}
-          </mat-option>
-        </mat-optgroup>
-
-      </mat-select>
-
-      <mat-error>Campo obligatorio</mat-error>
-    </mat-form-field>
-  </ng-container>
 
   <div class="submit" *ngIf="controls['esMesaTrabajo'].value !== null">
     <div matTooltip="Completa el formulario con los valores requeridos" [matTooltipDisabled]="activityForm.valid">

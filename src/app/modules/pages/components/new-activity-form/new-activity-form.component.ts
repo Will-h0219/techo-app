@@ -27,11 +27,11 @@ export class NewActivityFormComponent implements OnInit {
     comunidadId: [null, [Validators.required]],
     fechaJornada: [null, [Validators.required]],
     esMesaTrabajo: [null, [Validators.required]],
+    numeroHabitantes: [null, [Validators.required]],
 
     mesaTrabajo: this.fb.group({
       temasTratados: [null, [Validators.required]],
       compromisos: [null, [Validators.required]],
-      numeroHabitantes: [null, [Validators.required]],
       linkActa: [null],
     }),
 
@@ -40,7 +40,7 @@ export class NewActivityFormComponent implements OnInit {
       descripcionActividad: [null, [Validators.required]]
     }),
 
-    voluntariosIds: [{value: null, disabled: true}, [Validators.required]]
+    voluntariosIds: [null, [Validators.required]]
   });
 
   get controls() {
@@ -74,7 +74,13 @@ export class NewActivityFormComponent implements OnInit {
       switchMap((value) => this.volunteerService.volunteerPerCommunity(value))
     )
     .subscribe({
-      next: (resp) => this.volunteers = resp
+      next: (resp) => {
+        if (!resp[0].voluntarios.length) {
+          let community = this.communities.find(x => x.id === this.controls['comunidadId'].value);
+          this.snackBar.open(`No hay voluntarios registrados en ${community?.nombre}. Comunicate con soporte.`, "Ok");
+        }
+        this.volunteers = resp
+      }
     });
   }
 
@@ -83,7 +89,6 @@ export class NewActivityFormComponent implements OnInit {
       tap(() => {
         this.activityForm.get('mesaTrabajo')?.disable();
         this.activityForm.get('actividadAlternativa')?.disable();
-        this.controls['voluntariosIds'].disable();
       }),
       filter((value) => value !== null)
     )
@@ -95,9 +100,7 @@ export class NewActivityFormComponent implements OnInit {
         } else {
           this.activityForm.get('actividadAlternativa')?.enable();
           this.activityForm.get('mesaTrabajo')?.disable();
-          
         }
-        this.controls['voluntariosIds'].enable();
       }
     });
   }

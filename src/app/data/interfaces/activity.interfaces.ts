@@ -14,6 +14,7 @@ export interface NewActivityBody {
   esMesaTrabajo: boolean;
   voluntariosIds: number[];
   fechaJornada: string;
+  habitantesParticipantes: number;
   mesaTrabajo?: NewMesaTrabajo;
   actividadAlternativa?: NewActividadAlternativa;
 }
@@ -22,7 +23,6 @@ export interface NewMesaTrabajo {
   temasTratados: string;
   compromisos: string;
   linkActa?: string;
-  habitantesParticipantes: number;
 }
 
 export interface NewActividadAlternativa {

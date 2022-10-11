@@ -2,6 +2,7 @@ export interface ActivityFormValue {
   comunidadId: number;
   fechaJornada: string;
   esMesaTrabajo: boolean;
+  numeroHabitantes: number;
   voluntariosIds: number[];
   mesaTrabajo?: MesaTrabajoGroup;
   actividadAlternativa?: ActividadAlternativaGroup;
@@ -10,7 +11,6 @@ export interface ActivityFormValue {
 export interface MesaTrabajoGroup {
   temasTratados: string;
   compromisos: string;
-  numeroHabitantes: number;
   linkActa?: string;
 }
 

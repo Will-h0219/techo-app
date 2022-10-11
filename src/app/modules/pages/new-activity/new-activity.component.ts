@@ -44,6 +44,7 @@ export class NewActivityComponent implements OnInit {
       voluntarioId: this.userData.voluntarioId,
       esMesaTrabajo: formValue.esMesaTrabajo,
       fechaJornada: !date ? new Date().toISOString() : new Date(date).toISOString(),
+      habitantesParticipantes: formValue.numeroHabitantes,
       voluntariosIds: formValue.voluntariosIds
     };
 
@@ -51,7 +52,6 @@ export class NewActivityComponent implements OnInit {
       body.mesaTrabajo = {
         compromisos: formValue.mesaTrabajo!.compromisos,
         temasTratados: formValue.mesaTrabajo!.temasTratados,
-        habitantesParticipantes: formValue.mesaTrabajo!.numeroHabitantes
       }
       if (!!formValue.mesaTrabajo!.linkActa) {
         body.mesaTrabajo.linkActa = formValue.mesaTrabajo!.linkActa;
