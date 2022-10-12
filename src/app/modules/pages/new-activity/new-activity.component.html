@@ -5,5 +5,5 @@
     <p>Ingresa la información de las actividades que realizaste en comunidad. Recuerda adjuntar el link de google drive del acta si fue mesa de trabajo.</p>
   </div>
 
-  <app-new-activity-form (onSubmit)="submit($event)"></app-new-activity-form>
+  <app-new-activity-form [editValue]="activity" (onSubmit)="submit($event)"></app-new-activity-form>
 </section>

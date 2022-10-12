@@ -1,0 +1,22 @@
+.container {
+  padding: 4px 8px;
+  .center {
+    text-align: center;
+    .icon {
+      transform: scale(2);
+      &.success {
+        color: #339900;
+      }
+      &.warn {
+        color: #ffcc00;
+      }
+      &.error {
+        color: #cc3300;
+      }
+    }
+  
+    .title {
+      margin-top: 16px;
+    }
+  }
+}

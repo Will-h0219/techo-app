@@ -6,12 +6,14 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { UnauthorizedDialogComponent } from './dialogs/unauthorized-dialog/unauthorized-dialog.component';
+import { NotificationDialogComponent } from './dialogs/notification-dialog/notification-dialog.component';
 
 @NgModule({
   declarations: [
     SidenavComponent,
     SpinnerComponent,
-    UnauthorizedDialogComponent
+    UnauthorizedDialogComponent,
+    NotificationDialogComponent
   ],
   imports: [
     CommonModule,

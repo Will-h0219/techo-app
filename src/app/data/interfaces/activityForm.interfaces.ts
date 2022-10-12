@@ -6,6 +6,7 @@ export interface ActivityFormValue {
   voluntariosIds: number[];
   mesaTrabajo?: MesaTrabajoGroup;
   actividadAlternativa?: ActividadAlternativaGroup;
+  editTargetId?: string | number;
 }
 
 export interface MesaTrabajoGroup {

@@ -4,9 +4,12 @@ import { ActivityService } from '../../../../app/data/services/activity/activity
 import { UserData } from '../../../../app/data/interfaces/auth.interfaces';
 import { ActivityFormValue } from '../../../../app/data/interfaces/activityForm.interfaces';
 import { NewActivityBody } from '../../../../app/data/interfaces/activity.interfaces';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivityAddedDialogComponent } from '../components/dialogs/activity-added-dialog/activity-added-dialog.component';
+import { filter, switchMap } from 'rxjs';
+import { DetailedActivityInfo } from 'src/app/data/interfaces/detailedActivity.interfaces';
+import { NotificationDialogComponent } from 'src/app/shared/dialogs/notification-dialog/notification-dialog.component';
 
 @Component({
   selector: 'app-new-activity',
@@ -16,24 +19,74 @@ import { ActivityAddedDialogComponent } from '../components/dialogs/activity-add
 export class NewActivityComponent implements OnInit {
 
   userData!: UserData;
+  activityId: string = '';
+  workbenchParam: string = '';
+  activity: DetailedActivityInfo | null = null;
 
   constructor(private activityService: ActivityService,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userData')!);
+    this.init();
+  }
+
+  init() {
+    if (!this.router.url.includes('editar')) { return }
+
+    this.activatedRoute.params
+      .pipe(
+        switchMap(({id}) => {
+          this.activityId = id;
+          return this.activatedRoute.queryParams.pipe(
+            filter((param) => !!param['workbench'])
+          )
+        }),
+        switchMap(({ workbench }) => {
+          this.workbenchParam = workbench;
+          return this.activityService.getDetailedActivity(this.activityId, workbench)
+        })
+      )
+      .subscribe({
+        next: (resp) => this.activity = resp
+      })
   }
 
   submit(formValue: ActivityFormValue) {
+    console.log(formValue)
     let body = this.createNewActivityBody(formValue);
 
-    this.activityService.newActivity(body).subscribe({
-      next: (resp) => {
-        console.log(resp);
-        this.dialog.open(ActivityAddedDialogComponent);
-      }
-    });
+    if (!!formValue.editTargetId) {
+      this.activityService.updateActivity(this.activityId, formValue.editTargetId, body).subscribe({
+        next: (resp) => {
+          console.log(resp);
+          const routeParam = `tablero/actividad/${this.activityId}`;
+          const queryParam: Params = {
+            workbench: this.workbenchParam
+          };
+          this.dialog.open(NotificationDialogComponent, {
+            disableClose: true,
+            data: {
+              type: 'success',
+              title: 'Listo!',
+              content: 'Actividad actualizada.',
+              routeParam,
+              queryParam
+            }
+          })
+        }
+      })
+    } else {
+      this.activityService.newActivity(body).subscribe({
+        next: (resp) => {
+          console.log(resp);
+          this.dialog.open(ActivityAddedDialogComponent);
+        }
+      });
+    }
+
   }
 
   createNewActivityBody(formValue: ActivityFormValue) {

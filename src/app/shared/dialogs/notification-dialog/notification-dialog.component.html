@@ -1,0 +1,32 @@
+<section class="container">
+  <div class="center">
+    <mat-icon class="icon success" *ngIf="data.type === 'success'">check_circle</mat-icon>
+    <mat-icon class="icon warn" *ngIf="data.type === 'warn'">warning</mat-icon>
+    <mat-icon class="icon error" *ngIf="data.type === 'error'">error_outline</mat-icon>
+  
+    <h2 class="title">{{ data.title }}</h2>
+  </div>
+  
+  <mat-dialog-content class="center" *ngIf="!!data.content">
+    <h3>{{ data.content }}</h3>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="center">
+    <ng-container *ngIf="!data.queryParam else elseTemplate">
+      <a
+      mat-button
+      [routerLink]="[ !!data.routeParam ? data.routeParam: '/tablero' ]"
+      color="primary"
+      mat-dialog-close>Ok</a>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <a
+      mat-button
+      [routerLink]="[ !!data.routeParam ? data.routeParam: '/tablero' ]"
+      [queryParams]="data.queryParam"
+      color="primary"
+      mat-dialog-close>Ok</a>
+    </ng-template>
+    
+  </mat-dialog-actions>
+</section>

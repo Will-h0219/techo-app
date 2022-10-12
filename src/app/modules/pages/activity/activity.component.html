@@ -30,6 +30,11 @@
 
       </div>
 
+      <div class="info-row center">
+        <h3 class="title">Número de personas de la comunidad en la jornada:</h3>
+        <p>{{ activity.generalidades.habitantesParticipantes }}</p>
+      </div>
+
       <ng-container *ngIf="activity.generalidades.esMesaTrabajo; else alternativeActivity">
         <div>
           <h3 class="title">Temas tratados:</h3>
@@ -39,10 +44,7 @@
         </div>
 
         <div class="row">
-          <div class="info-row center">
-            <h3 class="title">Número de personas de la comunidad en la jornada:</h3>
-            <p>{{ activity.habitantesParticipantes }}</p>
-          </div>
+          
 
           <ng-container *ngIf="!!activity.linkActa">
             <a mat-button [href]="activity.linkActa" target="_blank">
@@ -71,7 +73,8 @@
         mat-raised-button
         color="primary"
         class="edit-btn"
-        [routerLink]="[ '/tablero/editar-actividad', activity.id ]"
+        [routerLink]="[ '/tablero/editar-actividad', activity.generalidades.id ]"
+        [queryParams]="{ workbench: activity.generalidades.esMesaTrabajo }"
       >
         Editar
         <mat-icon>edit</mat-icon>

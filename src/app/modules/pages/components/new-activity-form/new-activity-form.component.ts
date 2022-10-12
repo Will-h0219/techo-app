@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, switchMap, tap } from 'rxjs';
 
@@ -6,9 +6,10 @@ import { VolunteerService } from '../../../../../app/data/services/volunteer/vol
 import { CommunityService } from '../../../../../app/data/services/community/community.service';
 import { UserData } from '../../../../../app/data/interfaces/auth.interfaces';
 import { CommunityInfo } from '../../../../../app/data/interfaces/community.interfaces';
-import { VolunteerPerCommunity } from '../../../../../app/data/interfaces/volunteer.interfaces';
+import { VolunteerItem, VolunteerPerCommunity } from '../../../../../app/data/interfaces/volunteer.interfaces';
 import { ActivityFormValue } from '../../../../../app/data/interfaces/activityForm.interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DetailedActivityInfo } from 'src/app/data/interfaces/detailedActivity.interfaces';
 
 @Component({
   selector: 'app-new-activity-form',
@@ -16,8 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./new-activity-form.component.scss']
 })
 export class NewActivityFormComponent implements OnInit {
-  
+
   @Output() onSubmit: EventEmitter<ActivityFormValue> = new EventEmitter();
+  @Input() editValue: DetailedActivityInfo | null = null;
 
   userData!: UserData;
   communities: CommunityInfo[] = [];
@@ -60,6 +62,36 @@ export class NewActivityFormComponent implements OnInit {
     this.controls['comunidadId'].setValue(this.userData.comunidadAsignada);
     this.controls['mesaTrabajo'].disable();
     this.controls['actividadAlternativa'].disable();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes['editValue'].currentValue) { return }
+
+    const { comunidadId, fechaJornada, esMesaTrabajo, habitantesParticipantes, asistentes } = changes['editValue'].currentValue.generalidades;
+    const voluntariosIds: number[] = [];
+    asistentes.forEach((x: VolunteerItem) => voluntariosIds.push(x.id));
+    this.activityForm.patchValue({
+      comunidadId,
+      fechaJornada,
+      esMesaTrabajo,
+      numeroHabitantes: habitantesParticipantes,
+      voluntariosIds
+    });
+
+    if (changes['editValue'].currentValue.generalidades.esMesaTrabajo) {
+      const { temasTratados, compromisos, linkActa } = changes['editValue'].currentValue;
+      this.activityForm.get('mesaTrabajo')?.patchValue({
+        temasTratados,
+        compromisos,
+        linkActa
+      });
+    } else {
+      const { nombre, descripcion } = changes['editValue'].currentValue;
+      this.activityForm.get('actividadAlternativa')?.patchValue({
+        actividadesRealizadas: nombre,
+        descripcionActividad: descripcion
+      })
+    }
   }
 
   setCommunities() {
@@ -114,7 +146,10 @@ export class NewActivityFormComponent implements OnInit {
       });
       return;
     }
-    this.onSubmit.emit(this.activityForm.value);
+    const value: ActivityFormValue = this.activityForm.value;
+    if (!!this.editValue) { value.editTargetId = this.editValue.id }
+
+    this.onSubmit.emit(value);
     this.activityForm.reset();
     this.controls['comunidadId'].setValue(this.userData.comunidadAsignada);
   }

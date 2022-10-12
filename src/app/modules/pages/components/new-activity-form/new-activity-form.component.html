@@ -26,7 +26,8 @@
 
       <div class="workbench__check">
         <mat-label>Fue mesa de trabajo?</mat-label>
-        <mat-radio-group class="workbench__radio" formControlName="esMesaTrabajo">
+        <mat-radio-group class="workbench__radio" formControlName="esMesaTrabajo"
+          [disabled]="!!editValue">
           <mat-radio-button [value]="true">Si</mat-radio-button>
           <mat-radio-button [value]="false">No</mat-radio-button>
         </mat-radio-group>

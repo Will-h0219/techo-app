@@ -5,7 +5,6 @@ export interface DetailedActivityInfo {
   temasTratados?:           string;
   compromisos?:             string;
   linkActa?:                string;
-  habitantesParticipantes?: number;
   generalidades:            Generalidades;
   nombre?:                  string;
   descripcion?:             string;
@@ -13,10 +12,12 @@ export interface DetailedActivityInfo {
 
 export interface Generalidades {
   id:               number;
-  fechaJornada:     Date;
+  fechaJornada:     Date | string;
   esMesaTrabajo:    boolean;
   estado:           string;
   nombreVoluntario: string;
+  comunidadId:      number;
   nombreComunidad:  string;
   asistentes:       VolunteerItem[];
+  habitantesParticipantes: number;
 }

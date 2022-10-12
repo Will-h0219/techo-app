@@ -51,4 +51,9 @@ export class ActivityService {
     const url = `${this.baseUrl}/api/actividades/${activityId}`;
     return this.http.delete(url);
   }
+
+  updateActivity(activityId: string | number, targetId: string | number, data: NewActivityBody) {
+    const url = `${this.baseUrl}/api/actividades/${activityId}/editar/${targetId}`;
+    return this.http.put(url, data);
+  }
 }
