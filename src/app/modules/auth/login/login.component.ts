@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
           return;
         }
         localStorage.setItem('userData', JSON.stringify(resp.result));
+        this.snackBar.dismiss();
         this.router.navigateByUrl('/tablero');
       },
       error: (err: Error) => {

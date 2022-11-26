@@ -4,7 +4,6 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 import { UserData } from "../data/interfaces/auth.interfaces";
 
-
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   private authApi: string = environment.authApi;
