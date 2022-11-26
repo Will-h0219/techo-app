@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
 import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
     path: 'tablero',
-    loadChildren: () => import('./modules/pages/pages.module').then( m => m.PagesModule)
+    loadChildren: () => import('./modules/pages/pages.module').then( m => m.PagesModule),
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
