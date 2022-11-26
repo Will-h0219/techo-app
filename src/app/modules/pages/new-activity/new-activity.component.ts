@@ -82,7 +82,9 @@ export class NewActivityComponent implements OnInit {
       this.activityService.newActivity(body).subscribe({
         next: (resp) => {
           console.log(resp);
-          this.dialog.open(ActivityAddedDialogComponent);
+          this.dialog.open(ActivityAddedDialogComponent, {
+            disableClose: true
+          });
         }
       });
     }
