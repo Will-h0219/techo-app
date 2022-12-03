@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { filter, switchMap, tap } from 'rxjs';
 
 import { VolunteerService } from '../../../../../app/data/services/volunteer/volunteer.service';
@@ -8,8 +9,7 @@ import { UserData } from '../../../../../app/data/interfaces/auth.interfaces';
 import { CommunityInfo } from '../../../../../app/data/interfaces/community.interfaces';
 import { VolunteerItem, VolunteerPerCommunity } from '../../../../../app/data/interfaces/volunteer.interfaces';
 import { ActivityFormValue } from '../../../../../app/data/interfaces/activityForm.interfaces';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { DetailedActivityInfo } from 'src/app/data/interfaces/detailedActivity.interfaces';
+import { DetailedActivityInfo } from '../../../../../app/data/interfaces/detailedActivity.interfaces';
 
 @Component({
   selector: 'app-new-activity-form',

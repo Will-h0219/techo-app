@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
         }
         localStorage.setItem('userData', JSON.stringify(resp.result));
         this.snackBar.dismiss();
-        this.router.navigateByUrl('/tablero');
+        this.router.navigateByUrl('/jornadas');
       },
       error: (err: Error) => {
         console.log(err)

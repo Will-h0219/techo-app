@@ -1,0 +1,37 @@
+<section class="container main">
+  <div class="welcome">
+    <h1>Bienvenido!</h1>
+    <h2>{{ userData.nombreVoluntario | titlecase }}</h2>
+  </div>
+  
+  <div class="cards">
+    <div class="controls">
+      <h3>Ultimas actividades registradas</h3>
+      <mat-paginator *ngIf="pagination"
+        [length]="pagination.totalCount"
+        [pageSize]="pagination.pageSize"
+        [showFirstLastButtons]="true"
+        hidePageSize="true"
+        (page)="handlePageEvent($event)"
+      ></mat-paginator>
+    </div>
+
+    <ng-container *ngIf="result$ | async as result">
+      <ng-container *ngIf="!result.data?.length">
+        <h3 class="no-activities">Aun no hay actividades registradas.</h3>
+      </ng-container>
+      
+      <div class="cards__grid">
+        <ng-container *ngFor="let item of result.data">
+          <app-activity-card [activity]="item" [coordinador]="userData.coordinador"></app-activity-card>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="add">
+    <a mat-fab class="add__btn" [routerLink]="[ 'nueva-actividad' ]" color="primary">
+      <mat-icon class="add__icon">add</mat-icon>
+    </a>
+  </div>
+</section>

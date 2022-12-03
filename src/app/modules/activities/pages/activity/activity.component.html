@@ -44,8 +44,6 @@
         </div>
 
         <div class="row">
-          
-
           <ng-container *ngIf="!!activity.linkActa">
             <a mat-button [href]="activity.linkActa" target="_blank">
               Acta de la jornada 
@@ -73,7 +71,7 @@
         mat-raised-button
         color="primary"
         class="edit-btn"
-        [routerLink]="[ '/tablero/editar-actividad', activity.generalidades.id ]"
+        [routerLink]="[ '/jornadas/editar-actividad', activity.generalidades.id ]"
         [queryParams]="{ workbench: activity.generalidades.esMesaTrabajo }"
       >
         Editar

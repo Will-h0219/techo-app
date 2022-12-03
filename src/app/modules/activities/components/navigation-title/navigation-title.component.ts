@@ -7,6 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class NavigationTitleComponent {
   @Input() title: string = '';
-  @Input() path: string = 'tablero';
+  @Input() path: string = 'jornadas';
 
 }

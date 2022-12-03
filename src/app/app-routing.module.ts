@@ -5,8 +5,8 @@ import { PageNotFoundComponent } from './modules/page-not-found/page-not-found.c
 
 const routes: Routes = [
   {
-    path: 'tablero',
-    loadChildren: () => import('./modules/pages/pages.module').then( m => m.PagesModule),
+    path: 'jornadas',
+    loadChildren: () => import('./modules/activities/activities.module').then( m => m.ActivitiesModule),
     canLoad: [AuthGuard],
     canActivate: [AuthGuard]
   },
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tablero',
+    redirectTo: '/jornadas',
     pathMatch: 'full'
   },
   { 

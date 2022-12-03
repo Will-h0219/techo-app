@@ -23,7 +23,7 @@ export class DeleteActivityDialogComponent {
       .subscribe({
         next: (resp) => {
           console.log(resp);
-          this.router.navigateByUrl('/tablero');
+          this.router.navigateByUrl('/jornadas');
         }
       })
   }

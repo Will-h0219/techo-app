@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { filter, Observable, switchMap } from 'rxjs';
 
-import { DetailedActivityInfo } from '../../../../app/data/interfaces/detailedActivity.interfaces';
-import { ActivityService } from '../../../../app/data/services/activity/activity.service';
-import { UserData } from '../../../../app/data/interfaces/auth.interfaces';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteActivityDialogComponent } from '../components/dialogs/delete-activity-dialog/delete-activity-dialog.component';
+import { ActivityService } from '../../../../../app/data/services/activity/activity.service';
+import { UserData } from '../../../../../app/data/interfaces/auth.interfaces';
+import { DetailedActivityInfo } from '../../../../../app/data/interfaces/detailedActivity.interfaces';
+import { DeleteActivityDialogComponent } from '../../components/dialogs/delete-activity-dialog/delete-activity-dialog.component';
 
 @Component({
   selector: 'app-activity',

@@ -16,4 +16,10 @@ export class VolunteerListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  statusClass(status: string): string {
+    if (status.toLowerCase() === 'activo') return 'check_circle';
+    if (status.toLowerCase() === 'inactivo') return 'cancel';
+    return 'remove_circle';
+  }
+
 }

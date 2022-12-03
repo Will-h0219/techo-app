@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
-import { ActivityService } from '../../../../app/data/services/activity/activity.service';
-import { UserData } from '../../../../app/data/interfaces/auth.interfaces';
-import { ActivityFormValue } from '../../../../app/data/interfaces/activityForm.interfaces';
-import { NewActivityBody } from '../../../../app/data/interfaces/activity.interfaces';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivityAddedDialogComponent } from '../components/dialogs/activity-added-dialog/activity-added-dialog.component';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { filter, switchMap } from 'rxjs';
-import { DetailedActivityInfo } from 'src/app/data/interfaces/detailedActivity.interfaces';
-import { NotificationDialogComponent } from 'src/app/shared/dialogs/notification-dialog/notification-dialog.component';
+
+import { ActivityService } from '../../../../../app/data/services/activity/activity.service';
+import { NewActivityBody } from '../../../../../app/data/interfaces/activity.interfaces';
+import { ActivityFormValue } from '../../../../../app/data/interfaces/activityForm.interfaces';
+import { UserData } from '../../../../../app/data/interfaces/auth.interfaces';
+import { DetailedActivityInfo } from '../../../../../app/data/interfaces/detailedActivity.interfaces';
+import { NotificationDialogComponent } from '../../../../../app/shared/dialogs/notification-dialog/notification-dialog.component';
+import { ActivityAddedDialogComponent } from '../../components/dialogs/activity-added-dialog/activity-added-dialog.component';
 
 @Component({
   selector: 'app-new-activity',
@@ -62,7 +62,7 @@ export class NewActivityComponent implements OnInit {
       this.activityService.updateActivity(this.activityId, formValue.editTargetId, body).subscribe({
         next: (resp) => {
           console.log(resp);
-          const routeParam = `tablero/actividad/${this.activityId}`;
+          const routeParam = `jornadas/actividad/${this.activityId}`;
           const queryParam: Params = {
             workbench: this.workbenchParam
           };

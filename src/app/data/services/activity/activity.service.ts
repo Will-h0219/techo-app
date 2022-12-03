@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
-import { NewActivityBody, SimpleActivity } from '../../interfaces/activity.interfaces';
-import { UserData } from '../../interfaces/auth.interfaces';
+import { NewActivityBody } from '../../interfaces/activity.interfaces';
 import { DetailedActivityInfo } from '../../interfaces/detailedActivity.interfaces';
 import { PaginatedData } from '../../interfaces/pagination.interface';
 import { QueryParams } from '../../interfaces/queryParam.interface';

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { SimpleActivity } from '../../../../../app/data/interfaces/activity.interfaces';
 
 @Component({

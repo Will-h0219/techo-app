@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   apiBase: 'https://localhost:44359',
-  authApi: 'https://localhost:44359/api/auth'
+  authApi: 'https://localhost:44359/api/auth',
+  // apiBase: 'https://techoapi20221130103328.azurewebsites.net',
+  // authApi: 'https://techoapi20221130103328.azurewebsites.net/api/auth'
 };
 
 /*

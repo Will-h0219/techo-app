@@ -15,14 +15,14 @@
     <ng-container *ngIf="!data.queryParam else elseTemplate">
       <a
       mat-button
-      [routerLink]="[ !!data.routeParam ? data.routeParam: '/tablero' ]"
+      [routerLink]="[ !!data.routeParam ? data.routeParam: '/jornadas' ]"
       color="primary"
       mat-dialog-close>Ok</a>
     </ng-container>
     <ng-template #elseTemplate>
       <a
       mat-button
-      [routerLink]="[ !!data.routeParam ? data.routeParam: '/tablero' ]"
+      [routerLink]="[ !!data.routeParam ? data.routeParam: '/jornadas' ]"
       [queryParams]="data.queryParam"
       color="primary"
       mat-dialog-close>Ok</a>
