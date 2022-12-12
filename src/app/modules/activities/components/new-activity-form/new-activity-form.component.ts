@@ -103,13 +103,14 @@ export class NewActivityFormComponent implements OnInit {
   setVolunteers() {
     this.controls['comunidadId'].valueChanges.pipe(
       filter((value) => value !== null),
+      tap(() => this.snackBar.dismiss()),
       switchMap((value) => this.volunteerService.volunteerPerCommunity(value))
     )
     .subscribe({
       next: (resp) => {
         if (!resp[0].voluntarios.length) {
           let community = this.communities.find(x => x.id === this.controls['comunidadId'].value);
-          this.snackBar.open(`No hay voluntarios registrados en ${community?.nombre}. Comunicate con soporte.`, "Ok");
+          this.snackBar.open(`No hay voluntarios registrados o activos en ${community?.nombre}. Comunicate con soporte.`, "Ok");
         }
         this.volunteers = resp
       }
